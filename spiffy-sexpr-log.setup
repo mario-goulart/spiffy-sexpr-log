@@ -1,0 +1,16 @@
+;;; awful.setup -*- scheme -*-
+
+;; Compile the extension
+(compile -S -s -O3 -d1 -J spiffy-sexpr-log.scm)
+(compile -S -s -O3 -d1 spiffy-sexpr-log.import.scm)
+
+;; Compile the application
+(compile -S -O3 -d1 spiffy-log2sexpr.scm -o spiffy-log2sexpr)
+
+(install-extension 'spiffy-sexpr-log
+                   '("spiffy-sexpr-log.so" "spiffy-sexpr-log.import.so")
+                   '((version "0.1")))
+
+(install-program 'spiffy-log2sexpr
+                 '("spiffy-log2sexpr")
+                 `((version "0.1")))
