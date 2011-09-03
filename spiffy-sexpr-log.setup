@@ -9,8 +9,8 @@
 
 (install-extension 'spiffy-sexpr-log
                    '("spiffy-sexpr-log.so" "spiffy-sexpr-log.import.so")
-                   '((version "0.1")))
+                   '((version "0.2")))
 
 (install-program 'spiffy-log2sexpr
                  '("spiffy-log2sexpr")
-                 `((version "0.1")))
+                 `((version "0.2")))
