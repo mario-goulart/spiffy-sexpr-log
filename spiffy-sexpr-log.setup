@@ -13,4 +13,4 @@
 
 (install-program 'spiffy-log2sexpr
                  '("spiffy-log2sexpr")
-                 `((version "0.2")))
+                 `((version "0.3")))
