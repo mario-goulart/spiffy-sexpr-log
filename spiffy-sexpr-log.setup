@@ -4,13 +4,20 @@
 (compile -S -s -O3 -d1 -J spiffy-sexpr-log.scm)
 (compile -S -s -O3 -d1 spiffy-sexpr-log.import.scm)
 
-;; Compile the application
+;; Compile the applications
 (compile -S -O3 -d1 spiffy-log2sexpr.scm -o spiffy-log2sexpr)
+(compile -S -O3 -d1 spiffy-split-log.scm -o spiffy-split-log)
+
+(define spiffy-sexpr-log-version "0.3")
 
 (install-extension 'spiffy-sexpr-log
                    '("spiffy-sexpr-log.so" "spiffy-sexpr-log.import.so")
-                   '((version "0.2")))
+                   `((version ,spiffy-sexpr-log-version)))
 
 (install-program 'spiffy-log2sexpr
                  '("spiffy-log2sexpr")
-                 `((version "0.3")))
+                 `((version spiffy-sexpr-log-version)))
+
+(install-program 'spiffy-split-log
+                 '("spiffy-split-log")
+                 `((version spiffy-sexpr-log-version)))

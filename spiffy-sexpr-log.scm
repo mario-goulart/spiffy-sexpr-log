@@ -3,21 +3,9 @@
 (import chicken scheme posix data-structures srfi-13 files)
 (use spiffy intarweb uri-common)
 
+(include "common.scm")
+
 (define split-log? (make-parameter #f))
-
-(define (pad-number n zeroes)
-  (define (pad num len)
-    (let ((str (if (string? num) num (number->string num))))
-      (if (equal? str "")
-          ""
-          (if (>= (string-length str) len)
-              str
-              (string-pad str len #\0)))))
-
-  (let ((len (string-length (->string n))))
-    (if (= len zeroes)
-        n
-        (pad n zeroes))))
 
 
 (define (get-current-log-file)
