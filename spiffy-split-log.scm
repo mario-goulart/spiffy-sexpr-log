@@ -32,7 +32,11 @@
     append:))
 
 
-(define (split-log log-file dont-ask?)
+(define (split-log log-file output-dir)
+  (when (file-exists? output-dir)
+    (print output-dir " already exists.  Aborting.")
+    (exit 1))
+  (create-directory output-dir 'with-parents)
   (let ((data (read-file log-file))
         (overwritten-log-files '()))
     (for-each (lambda (line)
@@ -42,26 +46,16 @@
                         (make-pathname dir (pad-number (date-day d) 2) "log")))
                   (unless (directory-exists? dir)
                     (create-directory dir 'with-parents))
-                  ;;; FIXME: handle --dont-ask
                   (log-line line split-log-file)))
               data)))
 
 (define (usage #!optional exit-code)
-  (print "Usage: " (pathname-strip-directory (program-name)) " [ --dont-ask ] <log file>")
-  (print #<<EOF
-
-Note: When called with --dont-ask, this program reuses log
-directories (e.g., if file 2012/01/27.log exists, it appends data to
-its end).  Thus, if this program is executed twice without having the
-output log file deleted after the first run, the log entries will be
-duplicated.
-EOF
-)
+  (print "Usage: " (pathname-strip-directory (program-name)) " <log file> <output dir>")
   (when exit-code (exit exit-code)))
 
 
-(let* ((args (command-line-arguments))
-       (dont-ask? (and (member "--dont-ask" args) #t)))
-  (when (null? args)
+(let* ((args (command-line-arguments)))
+  (when (or (null? args)
+            (null? (cdr args)))
     (usage 1))
-  (split-log (last args) dont-ask?))
+  (split-log (car args) (cadr args)))
