@@ -40,8 +40,12 @@
   (let ((data (read-file log-file))
         (overwritten-log-files '()))
     (for-each (lambda (line)
+                (unless (pair? line)
+                  (print "This log file doesn't seem to be in the sexpr format. Aborting.")
+                  (exit 1))
                 (let* ((d (parse-date (cadr line)))
-                       (dir (make-pathname (date-year d) (date-month d)))
+                       (dir (make-pathname (list output-dir (date-year d))
+                                           (date-month d)))
                        (split-log-file
                         (make-pathname dir (pad-number (date-day d) 2) "log")))
                   (unless (directory-exists? dir)
