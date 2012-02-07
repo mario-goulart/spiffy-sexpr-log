@@ -6,7 +6,7 @@
 
 ;; Compile the applications
 (compile -S -O3 -d1 spiffy-log2sexpr.scm -o spiffy-log2sexpr)
-(compile -S -O3 -d1 spiffy-split-log.scm -o spiffy-split-log)
+(compile -S -O3 -d1 spiffy-split-sexpr-log.scm -o spiffy-split-sexpr-log)
 
 (define spiffy-sexpr-log-version "0.3")
 
@@ -18,6 +18,6 @@
                  '("spiffy-log2sexpr")
                  `((version spiffy-sexpr-log-version)))
 
-(install-program 'spiffy-split-log
-                 '("spiffy-split-log")
+(install-program 'spiffy-split-sexpr-log
+                 '("spiffy-split-sexpr-log")
                  `((version spiffy-sexpr-log-version)))
