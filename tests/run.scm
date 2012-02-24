@@ -16,3 +16,4 @@
 
 (test-end "spiffy-log2sexpr")
 
+(test-exit)
