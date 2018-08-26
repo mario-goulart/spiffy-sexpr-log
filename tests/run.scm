@@ -3,7 +3,9 @@
 (test-begin "spiffy-log2sexpr")
 
 (let ((sexpr-log
-       (call-with-input-pipe "../spiffy-log2sexpr.scm access.log" read-file)))
+       (call-with-input-pipe
+        (make-pathname ".." "spiffy-log2sexpr.scm access.log")
+        read-file)))
   (test #t (equal? sexpr-log
                    '(("127.0.0.1"
                       "Thu Aug 25 19:14:15 2011"
