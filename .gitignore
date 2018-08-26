@@ -1,0 +1,10 @@
+spiffy-log2sexpr
+spiffy-sexpr-log.build.sh
+spiffy-sexpr-log.import.scm
+spiffy-sexpr-log.import.so
+spiffy-sexpr-log.install.sh
+spiffy-sexpr-log.link
+spiffy-sexpr-log.so
+spiffy-sexpr-log.static.o
+spiffy-split-sexpr-log
+tests/split/
