@@ -2,7 +2,7 @@
 ((egg "spiffy-sexpr-log.egg")
  (synopsis "Symbolic expression log format for Spiffy")
  (author "Mario Domenech Goulart")
- (depends spiffy regex)
+ (depends spiffy)
  (test-depends test)
  (category web)
  (license "BSD"))

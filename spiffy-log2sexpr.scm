@@ -2,14 +2,14 @@
 #| -*- scheme -*-
 exec csi -s $0 "$@"
 |#
-(use regex posix srfi-13)
+(use posix srfi-13)
 
 (define-record log-line ip date method uri http-version code referer user-agent)
 
 (define parse-log-line
   ;; IP [date] "<method> URI HTTP/<version>" resp-code "<referer>" "<user agent>"
   (let ((pattern
-         (regexp
+         (irregex
           (string-append "\\[([^\\]]+)\\] " ;; date
                          "\"([^\"]+)\" " ;; uri
                          "([0-9]+) " ;; resp-code
@@ -19,12 +19,12 @@ exec csi -s $0 "$@"
       (let* ((tokens (string-split line))
              (ip (car tokens))
              (line (string-intersperse (cdr tokens) " "))
-             (tokens (list->vector (cdr (string-match pattern line))))
-             (date (vector-ref tokens 0))
-             (uri (vector-ref tokens 1))
-             (code (string->number (vector-ref tokens 2)))
-             (referer (vector-ref tokens 3))
-             (user-agent (vector-ref tokens 4))
+             (matches (irregex-match pattern line))
+             (date (irregex-match-substring matches 1))
+             (uri (irregex-match-substring matches 2))
+             (code (string->number (irregex-match-substring matches 3)))
+             (referer (irregex-match-substring matches 4))
+             (user-agent (irregex-match-substring matches 5))
              (uri-tokens (string-split uri))
              (method (car uri-tokens))
              (uri (cadr uri-tokens))
@@ -51,7 +51,8 @@ exec csi -s $0 "$@"
                        (log-line-date log)
                        (string->symbol (log-line-method log))
                        (log-line-uri log)
-                       (string->number (string-substitute "HTTP/" "" (log-line-http-version log)))
+                       (string->number
+                        (irregex-replace "HTTP/" (log-line-http-version log) ""))
                        (log-line-code log)
                        (log-line-referer log)
                        (list (string-drop (string-drop-right (log-line-user-agent log) 1) 1)))))))
