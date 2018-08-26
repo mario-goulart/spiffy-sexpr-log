@@ -1,4 +1,8 @@
-(use posix srfi-1 utils)
+(module spiffy-split-sexpr-log ()
+
+(import scheme)
+(import chicken)
+(use data-structures extras files posix srfi-1 utils)
 
 (include "common.scm")
 
@@ -63,3 +67,5 @@
             (null? (cdr args)))
     (usage 1))
   (split-log (car args) (cadr args)))
+
+) ;; end module
