@@ -1,14 +1,8 @@
 ;; -*- scheme -*-
 ((egg "spiffy-sexpr-log.egg")
  (synopsis "Symbolic expression log format for Spiffy")
- (author "<a href=\"http://wiki.call-cc.org/users/mario-domenech-goulart\">Mario Domenech Goulart</a>")
+ (author "Mario Domenech Goulart")
  (depends spiffy regex)
  (test-depends test)
  (category web)
- (license "BSD")
- (files "spiffy-sexpr-log.scm"
-        "spiffy-sexpr-log.setup"
-        "spiffy-sexpr-log.meta"
-        "tests/run.scm"
-        "tests/access.log"
-        ))
+ (license "BSD"))
