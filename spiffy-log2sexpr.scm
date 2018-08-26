@@ -2,7 +2,12 @@
 #| -*- scheme -*-
 exec csi -s $0 "$@"
 |#
-(use posix srfi-13)
+
+(module spiffy-log2sexpr ()
+
+(import scheme)
+(import chicken)
+(use data-structures extras files irregex posix srfi-13)
 
 (define-record log-line ip date method uri http-version code referer user-agent)
 
@@ -57,3 +62,5 @@ exec csi -s $0 "$@"
                        (log-line-referer log)
                        (list (string-drop (string-drop-right (log-line-user-agent log) 1) 1)))))))
    (read-lines (car args))))
+
+) ;; end module
