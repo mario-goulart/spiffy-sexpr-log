@@ -1,7 +1,20 @@
 (module spiffy-sexpr-log (split-log?)
 
-(import chicken scheme posix data-structures srfi-13 files)
-(use spiffy intarweb uri-common)
+(import scheme)
+(cond-expand
+  (chicken-4
+   (import chicken posix data-structures srfi-13 files)
+   (use spiffy intarweb uri-common))
+  (chicken-5
+   (import (chicken base)
+           (chicken file)
+           (chicken pathname)
+           (chicken string)
+           (chicken time)
+           (chicken time posix))
+   (import spiffy intarweb uri-common))
+  (else
+   (error "Unsupported CHICKEN version.")))
 
 (include "common.scm")
 

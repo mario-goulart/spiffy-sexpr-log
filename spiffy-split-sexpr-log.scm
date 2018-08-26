@@ -1,8 +1,22 @@
 (module spiffy-split-sexpr-log ()
 
 (import scheme)
-(import chicken)
-(use data-structures extras files posix srfi-1 utils)
+(cond-expand
+  (chicken-4
+   (import chicken)
+   (use data-structures extras files posix srfi-1 utils))
+  (chicken-5
+   (import (chicken base)
+           (chicken io)
+           (chicken file)
+           (chicken format)
+           (chicken pathname)
+           (chicken process-context)
+           (chicken string))
+   (import (only srfi-1 last))
+   (define read-file read-list))
+  (else
+   (error "Unsupported CHICKEN version.")))
 
 (include "common.scm")
 
@@ -41,7 +55,7 @@
     (print output-dir " already exists.  Aborting.")
     (exit 1))
   (create-directory output-dir 'with-parents)
-  (let ((data (read-file log-file))
+  (let ((data (with-input-from-file log-file read-file))
         (overwritten-log-files '()))
     (for-each (lambda (line)
                 (unless (pair? line)

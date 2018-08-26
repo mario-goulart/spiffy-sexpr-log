@@ -6,8 +6,21 @@ exec csi -s $0 "$@"
 (module spiffy-log2sexpr ()
 
 (import scheme)
-(import chicken)
-(use data-structures extras files irregex posix srfi-13)
+(cond-expand
+  (chicken-4
+   (import chicken)
+   (use data-structures extras files irregex posix srfi-13))
+  (chicken-5
+   (import (chicken base)
+           (chicken format)
+           (chicken io)
+           (chicken irregex)
+           (chicken pathname)
+           (chicken process-context)
+           (chicken string))
+   (import srfi-13))
+  (else
+   (error "Unsupported CHICKEN version.")))
 
 (define-record log-line ip date method uri http-version code referer user-agent)
 
@@ -61,6 +74,6 @@ exec csi -s $0 "$@"
                        (log-line-code log)
                        (log-line-referer log)
                        (list (string-drop (string-drop-right (log-line-user-agent log) 1) 1)))))))
-   (read-lines (car args))))
+   (with-input-from-file (car args) read-lines)))
 
 ) ;; end module

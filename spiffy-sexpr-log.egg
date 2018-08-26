@@ -1,0 +1,13 @@
+;;; spiffy-sexpr-log.egg -*- scheme -*-
+
+((synopsis "Symbolic expression log format for Spiffy")
+ (author "Mario Domenech Goulart")
+ (license "BSD")
+ (category web)
+ (dependencies spiffy srfi-1 srfi-13)
+ (test-dependencies test)
+ (component-options
+  (csc-options "-O3" "-d1"))
+ (components (extension spiffy-sexpr-log)
+             (program spiffy-split-sexpr-log)
+             (program spiffy-log2sexpr)))
