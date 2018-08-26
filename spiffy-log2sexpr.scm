@@ -2,7 +2,7 @@
 #| -*- scheme -*-
 exec csi -s $0 "$@"
 |#
-(use regex posix)
+(use regex posix srfi-13)
 
 (define-record log-line ip date method uri http-version code referer user-agent)
 
