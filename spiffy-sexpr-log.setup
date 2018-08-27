@@ -8,7 +8,7 @@
 (compile -S -O3 -d1 spiffy-log2sexpr.scm -o spiffy-log2sexpr)
 (compile -S -O3 -d1 spiffy-split-sexpr-log.scm -o spiffy-split-sexpr-log)
 
-(define spiffy-sexpr-log-version "0.3")
+(define spiffy-sexpr-log-version "0.3.1")
 
 (install-extension 'spiffy-sexpr-log
                    '("spiffy-sexpr-log.so" "spiffy-sexpr-log.import.so")
