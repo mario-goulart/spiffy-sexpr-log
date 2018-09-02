@@ -16,8 +16,8 @@
 
 (install-program 'spiffy-log2sexpr
                  '("spiffy-log2sexpr")
-                 `((version spiffy-sexpr-log-version)))
+                 `((version ,spiffy-sexpr-log-version)))
 
 (install-program 'spiffy-split-sexpr-log
                  '("spiffy-split-sexpr-log")
-                 `((version spiffy-sexpr-log-version)))
+                 `((version ,spiffy-sexpr-log-version)))
